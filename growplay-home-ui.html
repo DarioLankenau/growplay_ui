@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrowPlay Home - Personalized Growth Hub</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0f;
+            min-height: 100vh;
+            padding: 0;
+            padding-bottom: 80px;
+            color: #fff;
+            width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .container {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+            background: transparent;
+            backdrop-filter: none;
+            border-radius: 0;
+            box-shadow: none;
+            position: relative;
+            z-index: 2;
+            min-height: calc(100vh - 60px);
+            box-sizing: border-box;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, 
+                rgba(147, 51, 234, 0.9) 0%, 
+                rgba(236, 72, 153, 0.9) 50%, 
+                rgba(59, 130, 246, 0.9) 100%);
+            padding: 32px 28px 36px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%),
+                conic-gradient(from 0deg, transparent 0deg, rgba(255,255,255,0.1) 90deg, transparent 180deg);
+            animation: headerFloat 8s ease-in-out infinite;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.1) 100%);
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .profile-pic {
+            width: 56px;
+            height: 56px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #00f5ff, #0066ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+            box-shadow: 
+                0 12px 24px rgba(0, 245, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            animation: profilePulse 4s ease-in-out infinite;
+            position: relative;
+        }
+        
+        .profile-pic::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #00f5ff, #0066ff, #00f5ff);
+            z-index: -1;
+            animation: borderGlow 3s ease-in-out infinite;
+        }
+        
+        .greeting {
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .level-badge {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            padding: 10px 18px;
+            border-radius: 24px;
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .growth-recap {
+            background: rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 24px;
+            color: white;
+            position: relative;
+            z-index: 3;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        
+        .xp-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+        
+        .xp-count {
+            font-size: 28px;
+            font-weight: 800;
+            font-family: 'Space Grotesk', sans-serif;
+            background: linear-gradient(135deg, #00f5ff, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .growth-icon {
+            font-size: 32px;
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+        
+        .mood-check {
+            text-align: center;
+            font-size: 15px;
+            opacity: 0.9;
+            font-weight: 500;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .mood-text {
+             margin-bottom: 5px;
+        }
+
+        .emoji-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .emoji-container span {
+            font-size: 36px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 10px;
+            border-radius: 10%;
+            border: 2px solid transparent;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .emoji-container span:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .emoji-container span.selected {
+            border-color: #00f5ff;
+            background: rgba(0, 245, 255, 0.2);
+            box-shadow: 0 0 12px rgba(0, 245, 255, 0.4);
+        }
+        
+        .content {
+            padding: 32px 28px;
+        }
+        
+        .section {
+            margin-bottom: 32px;
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #fff, rgba(255, 255, 255, 0.7));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .card {
+            background: rgba(25, 25, 40, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 
+                0 16px 32px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-bottom: 16px;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 
+                0 24px 48px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        .challenge-card::before {
+            background: linear-gradient(90deg, #9333ea, #ec4899, #3b82f6);
+        }
+        
+        .discover-card::before {
+            background: linear-gradient(90deg, #f59e0b, #ef4444, #8b5cf6);
+        }
+        
+        .events-card::before {
+            background: linear-gradient(90deg, #06b6d4, #10b981, #3b82f6);
+        }
+        
+        .sam-card::before {
+            background: linear-gradient(90deg, #00f5ff, #0066ff, #00f5ff);
+        }
+        
+        .card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 16px;
+            color: #fff;
+        }
+        
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.1);
+            height: 10px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 12px 0;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #9333ea, #ec4899);
+            width: 43%;
+            border-radius: 6px;
+            animation: progressGrow 2s ease-out;
+            box-shadow: 0 0 12px rgba(236, 72, 153, 0.4);
+        }
+        
+        .micro-action {
+            background: rgba(147, 51, 234, 0.1);
+            border: 2px solid rgba(147, 51, 234, 0.3);
+            border-radius: 18px;
+            padding: 18px;
+            margin: 16px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .micro-action:hover {
+            background: rgba(147, 51, 234, 0.2);
+            border-color: rgba(147, 51, 234, 0.5);
+            transform: scale(1.02);
+        }
+        
+        .complete-btn {
+            background: linear-gradient(135deg, #9333ea, #ec4899);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(147, 51, 234, 0.3);
+        }
+        
+        .complete-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(147, 51, 234, 0.4);
+        }
+        
+        .stats {
+            display: flex;
+            gap: 12px;
+            margin: 16px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 14px;
+            border-radius: 14px;
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        
+        .course-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .course-item:last-child {
+            border-bottom: none;
+        }
+        
+        .course-info h4 {
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #fff;
+            font-size: 15px;
+        }
+        
+        .course-meta {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .alignment-score {
+            background: linear-gradient(135deg, #00f5ff, #0066ff);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            box-shadow: 0 4px 8px rgba(0, 245, 255, 0.2);
+        }
+        
+        .event-item {
+            padding: 16px;
+            background: rgba(6, 182, 212, 0.08);
+            border-radius: 16px;
+            margin-bottom: 12px;
+            border-left: 3px solid #06b6d4;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(6, 182, 212, 0.2);
+        }
+        
+        .event-title {
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #fff;
+            font-size: 15px;
+        }
+        
+        .event-meta {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .rsvp-btn {
+            background: linear-gradient(135deg, #06b6d4, #10b981);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .rsvp-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .chat-preview {
+            background: rgba(0, 245, 255, 0.05);
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            border-radius: 18px;
+            padding: 18px;
+            margin-bottom: 16px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .chat-bubble {
+            background: linear-gradient(135deg, #00f5ff, #0066ff);
+            color: white;
+            padding: 14px 18px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 12px;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0, 245, 255, 0.2);
+            animation: chatBounce 3s ease-in-out infinite;
+        }
+        
+        .quick-prompts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .prompt-pill {
+            background: rgba(0, 245, 255, 0.08);
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            padding: 10px 16px;
+            border-radius: 16px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.9);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-weight: 500;
+        }
+        
+        .prompt-pill:hover {
+            background: rgba(0, 245, 255, 0.15);
+            border-color: rgba(0, 245, 255, 0.4);
+            transform: scale(1.02);
+        }
+        
+        .floating-sam {
+            position: fixed;
+            bottom: 32px;
+            right: 20px;
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #00f5ff, #0066ff);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            box-shadow: 
+                0 12px 24px rgba(0, 245, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            animation: samFloat 4s ease-in-out infinite;
+            z-index: 1000;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .floating-sam:hover {
+            transform: scale(1.1);
+        }
+        
+        .view-all-btn {
+            background: rgba(147, 51, 234, 0.1);
+            border: 2px solid rgba(147, 51, 234, 0.3);
+            color: #9333ea;
+            padding: 12px 24px;
+            border-radius: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 16px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-size: 14px;
+        }
+        
+        .view-all-btn:hover {
+            background: rgba(147, 51, 234, 0.2);
+            border-color: rgba(147, 51, 234, 0.5);
+            transform: scale(1.02);
+        }
+        
+        /* Styles for the new action buttons */
+        .action-btn {
+            display: block; /* Make button a block element */
+            width: 100%; /* Full width */
+            text-align: center;
+            padding: 12px 24px;
+            border-radius: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 16px; /* Space above the button */
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-size: 14px;
+            border: none; /* Remove default button border */
+            color: white; /* Default text color */
+        }
+        
+        .action-btn:hover {
+            transform: scale(1.02); /* Slight scale on hover */
+            opacity: 0.9;
+        }
+        
+        .linkedin-btn {
+            background: linear-gradient(135deg, #0e76a8, #2b3338); /* LinkedIn colors */
+            border: 2px solid rgba(14, 118, 168, 0.5);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(14, 118, 168, 0.3);
+        }
+        
+        .career-gps-btn {
+            background: linear-gradient(135deg, #f59e0b, #ef4444); /* Example colors */
+            border: 2px solid rgba(245, 158, 11, 0.5);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+        
+        /* Style for the monthly recap button */
+        .monthly-recap-btn {
+            background: linear-gradient(135deg, #3b82f6, #9333ea);
+            padding: 20px 28px;
+            display: inline-block;
+            width: auto;
+            max-width: 300px;
+            border-radius: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 24px;
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-size: 16px;
+            border: none;
+            color: white;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            text-align: center;
+        }
+
+        .monthly-recap-btn:hover {
+            background: linear-gradient(135deg, #9333ea, #3b82f6);
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+            transform: scale(1.02);
+            opacity: 1;
+        }
+        
+        @keyframes headerFloat {
+            0%, 100% { transform: rotate(0deg) translateY(0px); }
+            50% { transform: rotate(2deg) translateY(-5px); }
+        }
+        
+        @keyframes profilePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+        
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(5deg); }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes progressGrow {
+            from { width: 0%; }
+            to { width: 43%; }
+        }
+        
+        @keyframes chatBounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-4px); }
+            60% { transform: translateY(-2px); }
+        }
+        
+        @keyframes samFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-8px) rotate(2deg); }
+            75% { transform: translateY(-4px) rotate(-1deg); }
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(400%); }
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: confetti 3s ease-out infinite;
+            z-index: 10000;
+        }
+        
+        @keyframes confetti {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-120px) rotate(720deg);
+            }
+        }
+
+        /* Responsive Adjustments */
+        @media (min-width: 768px) { /* iPad size and up */
+            .container {
+                display: block;
+                position: relative;
+                top: auto;
+                bottom: auto;
+                left: auto;
+                right: auto;
+                max-width: 720px;
+                width: auto;
+                margin: 0 auto;
+                border-radius: 32px;
+                background: rgba(15, 15, 25, 0.8);
+                backdrop-filter: blur(40px);
+                box-shadow: 
+                    0 32px 64px rgba(0, 0, 0, 0.4),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                    0 0 0 1px rgba(255, 255, 255, 0.05);
+                padding: 24px;
+                min-height: auto;
+                box-sizing: border-box;
+            }
+
+            .header, .content {
+                padding: 0;
+            }
+
+            .header {
+                background: linear-gradient(135deg, 
+                    rgba(147, 51, 234, 0.9) 0%, 
+                    rgba(236, 72, 153, 0.9) 50%, 
+                    rgba(59, 130, 246, 0.9) 100%);
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .card h3 {
+                font-size: 20px;
+            }
+
+            .complete-btn {
+                padding: 12px 24px;
+                font-size: 14px;
+            }
+
+            .view-all-btn {
+                padding: 14px 28px;
+                font-size: 16px;
+            }
+
+            /* Apply grid to content for 2x2 layout */
+            .content {
+                display: grid; /* Enable grid layout */
+                grid-template-columns: repeat(2, 1fr); /* Two equal columns */
+                gap: 30px; /* Space between grid items */
+                padding: 24px; /* Keep content padding consistent with container */
+            }
+
+            /* Remove margin-bottom from sections when in grid */
+            .section {
+                margin-bottom: 0; 
+            }
+        }
+
+        @media (min-width: 1024px) { /* Desktop size - though primarily focusing on mobile/ipad */
+            .container {
+                max-width: 960px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-top">
+                <div class="profile-section">
+                    <div class="profile-pic">A</div>
+                    <div class="greeting">Hi Alex 👋</div>
+                </div>
+                <div class="level-badge">Level 4 – Communication Builder</div>
+            </div>
+            
+            <div class="growth-recap">
+                <div class="xp-section">
+                    <div>
+                        <div class="xp-count">2,847 XP</div>
+                        <div style="font-size: 13px; opacity: 0.8; font-weight: 500;">This Week's Growth ✨</div>
+                    </div>
+                    <div class="growth-icon">📈</div>
+                </div>
+                <div class="mood-check">
+                    <div class="mood-text">How are you today?</div>
+                    <div class="emoji-container">
+                        <span>😊</span> 
+                        <span>😐</span> 
+                        <span>😔</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Add monthly recap button -->
+            <button class="action-btn monthly-recap-btn">See your monthly recap!</button>
+        </div>
+        
+        <div class="content">
+            <!-- Challenges Section -->
+            <div class="section" id="challenges">
+                <div class="section-title">🔥 Challenges</div>
+                <div class="card challenge-card">
+                    <h3>🧩 Current Quest: Build Presentation Skills</h3>
+                    <div style="font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 12px; font-weight: 500;">Day 3 of 7</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    
+                    <div class="micro-action">
+                        <div>
+                            <div style="font-weight: 600; color: #fff; margin-bottom: 4px;">Today's Micro-Action</div>
+                            <div style="font-size: 14px; color: rgba(255,255,255,0.7);">Watch a 2-min TED Talk</div>
+                        </div>
+                        <button class="complete-btn" onclick="completeAction(this)">Mark Complete ✅</button>
+                    </div>
+                    
+                    <div class="stats">
+                        <div class="stat-item">👥 3 teammates joined</div>
+                        <div class="stat-item">⭐ 4.8/5 (25 reviews)</div>
+                    </div>
+                    
+                    <button class="view-all-btn">👁 View All Quests</button>
+                    <!-- Add button for LinkedIn Learning Course -->
+                    <button class="action-btn linkedin-btn">Complete Full Course on LinkedIn Learning</button>
+                </div>
+            </div>
+            
+            <!-- Discover Section -->
+            <div class="section" id="discover">
+                <div class="section-title">🔍 Discover</div>
+                <div class="card discover-card">
+                    <h3>🎯 Recommended for You</h3>
+                    
+                    <div class="course-item">
+                        <div class="course-info">
+                            <h4>Strategic Thinking 101</h4>
+                            <div class="course-meta">⭐ 4.7 stars • 53 learners • Leadership, Critical Thinking</div>
+                        </div>
+                        <div class="alignment-score">92% match</div>
+                    </div>
+                    
+                    <div class="course-item">
+                        <div class="course-info">
+                            <h4>Advanced Communication</h4>
+                            <div class="course-meta">⭐ 4.9 stars • 127 learners • Communication, Influence</div>
+                        </div>
+                        <div class="alignment-score">88% match</div>
+                    </div>
+                    
+                    <div class="course-item">
+                        <div class="course-info">
+                            <h4>Design Thinking Fundamentals</h4>
+                            <div class="course-meta">⭐ 4.6 stars • 89 learners • Innovation, Problem Solving</div>
+                        </div>
+                        <div class="alignment-score">85% match</div>
+                    </div>
+                    <!-- Add button for Career GPS/Workday -->
+                    <button class="action-btn career-gps-btn">View Growth in Career GPS</button>
+                </div>
+            </div>
+            
+            <!-- Events Section -->
+            <div class="section" id="events">
+                <div class="section-title">🎉 Events</div>
+                <div class="card events-card">
+                    <h4 style="margin-bottom: 16px; color: #fff; font-size: 16px;">📆 Your Time Off</h4>
+                    <div style="font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 24px;">Next break: June 15-17 (3 days)</div>
+                    
+                    <h4 style="margin-bottom: 16px; color: #fff; font-size: 16px;">🏫 In-Person Lessons</h4>
+                    <div class="event-item">
+                        <div class="event-title">Handling Workplace Conflict</div>
+                        <div class="event-meta">
+                            <span>📅 June 3, 2:00 PM</span>
+                            <span>👥 8 attending</span>
+                            <span>⭐ 4.8/5</span>
+                        </div>
+                        <button class="rsvp-btn">RSVP</button>
+                    </div>
+                    
+                    <div class="event-item">
+                        <div class="event-title">Design Thinking 101</div>
+                        <div class="event-meta">
+                            <span>📅 June 5, 10:00 AM</span>
+                            <span>👥 12 attending</span>
+                            <span>⭐ 4.9/5</span>
+                        </div>
+                        <button class="rsvp-btn">RSVP</button>
+                    </div>
+                    
+                    <h4 style="margin: 24px 0 16px; color: #fff; font-size: 16px;">👥 Social Events</h4>
+                    <div class="event-item">
+                        <div class="event-title">Board Game Night @ Lounge A</div>
+                        <div class="event-meta">
+                            <span>📅 Today, 6:00 PM</span>
+                            <span>👥 15 attending</span>
+                        </div>
+                        <button class="rsvp-btn">Join</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SAM Chatbot Section -->
+            <div class="section">
+                <div class="section-title">🤖 SAM HR Assistant</div>
+                <div class="card sam-card">
+                    <div class="chat-preview">
+                        <div class="chat-bubble">Ask me HR questions anytime! 💼</div>
+                        <div style="font-size: 12px; color: rgba(255,255,255,0.6); font-weight: 500;">💡 Need help with vacation requests or policies?</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 16px; font-weight: 600; color: #fff;">Quick HR Questions:</div>
+                    <div class="quick-prompts">
+                        <div class="prompt-pill">How many vacation days left?</div>
+                        <div class="prompt-pill">Submit time off request</div>
+                        <div class="prompt-pill">Company holiday schedule</div>
+                        <div class="prompt-pill">Benefits overview</div>
+                        <div class="prompt-pill">HR policies</div>
+                        <div class="prompt-pill">Payroll questions</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="floating-sam" onclick="openSAM()">🤖</div>
+    
+    <script>
+        function completeAction(button) {
+            button.innerHTML = '✨ Completed!';
+            button.style.background = 'linear-gradient(135deg, #10b981, #06b6d4)';
+            button.disabled = true;
+            
+            // Add confetti effect
+            createConfetti();
+            
+            // Update progress
+            setTimeout(() => {
+                const progressFill = document.querySelector('.progress-fill');
+                progressFill.style.width = '57%';
+                progressFill.style.background = 'linear-gradient(90deg, #10b981, #06b6d4)';
+                progressFill.style.boxShadow = '0 0 16px rgba(6, 182, 212, 0.4)';
+            }, 500);
+        }
+
+        function createConfetti() {
+            const colors = ['#00f5ff', '#0066ff', '#9333ea', '#ec4899', '#10b981'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(confetti);
+                
+                // Remove confetti after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, 3000);
+            }
+        }
+
+        function openSAM() {
+            // Create SAM chat modal
+            const modal = document.createElement('div');
+            modal.style.position = 'fixed';
+            modal.style.bottom = '100px';
+            modal.style.right = '32px';
+            modal.style.width = '320px';
+            modal.style.background = 'rgba(15, 15, 25, 0.95)';
+            modal.style.backdropFilter = 'blur(40px)';
+            modal.style.borderRadius = '24px';
+            modal.style.padding = '24px';
+            modal.style.boxShadow = '0 32px 64px rgba(0, 0, 0, 0.4)';
+            modal.style.border = '1px solid rgba(255, 255, 255, 0.1)';
+            modal.style.zIndex = '1000';
+            modal.style.animation = 'slideUp 0.3s ease-out';
+            
+            modal.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 style="color: white; font-family: 'Space Grotesk', sans-serif;">SAM HR Assistant</h3>
+                    <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: white; cursor: pointer; font-size: 20px;">×</button>
+                </div>
+                <div style="background: rgba(0, 245, 255, 0.1); border-radius: 16px; padding: 16px; margin-bottom: 16px;">
+                    <div style="color: white; font-weight: 500;">How can I help you today?</div>
+                </div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <button class="prompt-pill" onclick="this.parentElement.parentElement.remove()">Vacation Days</button>
+                    <button class="prompt-pill" onclick="this.parentElement.parentElement.remove()">Time Off Request</button>
+                    <button class="prompt-pill" onclick="this.parentElement.parentElement.remove()">Benefits</button>
+                    <button class="prompt-pill" onclick="this.parentElement.parentElement.remove()">Policies</button>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const emojis = document.querySelectorAll('.emoji-container span');
+
+            emojis.forEach(emoji => {
+                emoji.addEventListener('click', () => {
+                    // Remove 'selected' class from all emojis
+                    emojis.forEach(e => e.classList.remove('selected'));
+                    
+                    // Add 'selected' class to the clicked emoji
+                    emoji.classList.add('selected');
+                    
+                    // Optional: Add logic here to record the mood selection
+                    console.log('Selected mood:', emoji.textContent);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
