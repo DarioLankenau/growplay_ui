@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenges - GrowPlay</title>
+    <link rel="stylesheet" href="growplay-home-ui.html">
+    <link rel="stylesheet" href="components/footer.css">
+    <style>
+        body { background: #0a0a0f; color: #fff; font-family: 'Inter', sans-serif; margin: 0; }
+        .container { max-width: 600px; margin: 0 auto; padding: 0 0 80px 0; }
+        @media (max-width: 767px) {
+            .container { display: none; }
+        }
+        /* Copia qui gli stili principali della home se necessario */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section" id="challenges">
+            <div class="section-title">🔥 Challenges</div>
+            <div class="card challenge-card">
+                <h3>🧩 Current Quest: Build Presentation Skills</h3>
+                <div style="font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 12px; font-weight: 500;">Day 3 of 7</div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="micro-action">
+                    <div>
+                        <div style="font-weight: 600; color: #fff; margin-bottom: 4px;">Today's Micro-Action</div>
+                        <div style="font-size: 14px; color: rgba(255,255,255,0.7);">Watch a 2-min TED Talk</div>
+                    </div>
+                    <button class="complete-btn" onclick="completeAction(this)">Mark Complete ✅</button>
+                </div>
+                <div class="stats">
+                    <div class="stat-item">👥 3 teammates joined</div>
+                    <div class="stat-item">⭐ 4.8/5 (25 reviews)</div>
+                </div>
+                <button class="view-all-btn">👁 View All Quests</button>
+                <button class="action-btn linkedin-btn">Complete Full Course on LinkedIn Learning</button>
+            </div>
+        </div>
+    </div>
+    <script src="components/footer.js"></script>
+    <script>
+        function completeAction(button) {
+            button.innerHTML = '✨ Completed!';
+            button.style.background = 'linear-gradient(135deg, #10b981, #06b6d4)';
+            button.disabled = true;
+        }
+    </script>
+</body>
+</html> 

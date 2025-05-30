@@ -1,0 +1,12 @@
+{
+  "name": "growplay-ui",
+  "version": "1.0.0",
+  "description": "GrowPlay UI Local Server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+} 
