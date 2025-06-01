@@ -5,8 +5,8 @@
     </div>
     <div class="page-layout-stacked-content">
       <router-link to="/events/time-off" class="event-choice-card">
-        <h3>Your Time Off</h3>
-        <p>Discover where your free time can take you</p>
+        <h3>Social Events</h3>
+        <p>Be part of the SACE community and enjoy having fun!</p>
         <img :src="eventYourTimeOffImg" alt="Family enjoying time off" @error="setDefaultImage">
       </router-link>
 
@@ -43,75 +43,65 @@ export default {
 </script>
 
 <style scoped>
-/* Stili da events.html */
+/* Stili specifici per EventsView.vue */
 .event-choice-card {
-    background: rgba(25, 25, 40, 0.8); /* Standard .card background */
+    background: rgba(25, 25, 40, 0.95); /* More opaque background */
     backdrop-filter: blur(20px);
     border-radius: 24px;
-    padding: 24px;
-    margin-bottom: 20px;
+    padding: 35px; /* Significantly increased padding */
+    margin-bottom: 30px; /* Increased space between cards */
     text-decoration: none;
     display: block;
     color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15); /* More prominent border */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative; /* Per ::before se vogliamo l'effetto shimmer standard */
-    overflow: hidden; /* Per ::before */
+    position: relative;
+    overflow: hidden;
 }
 
-.event-choice-card::before { /* Aggiunto effetto shimmer standard */
+.event-choice-card::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #06b6d4, #10b981, #3b82f6); /* Gradient per events */
+    height: 4px; /* Thicker shimmer */
+    background: linear-gradient(90deg, #06b6d4, #10b981, #3b82f6); /* Gradient for events */
     animation: shimmer 3s ease-in-out infinite;
 }
 
 .event-choice-card:hover {
-    transform: translateY(-8px) scale(1.01); /* Effetto hover standard .card */
-    box-shadow: 
-        0 24px 48px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-8px) scale(1.01);
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        inset 0 2px 0 rgba(255, 255, 255, 0.2); /* More prominent inner shadow */
+    border-color: rgba(255, 255, 255, 0.2); /* More prominent border */
 }
 
 .event-choice-card h3 {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 20px; /* Coerente con .card h3 (era 18px, aumentato) */
+    font-size: 26px; /* Significantly larger font size */
     font-weight: 600;
     margin-top: 0;
-    margin-bottom: 8px;
+    margin-bottom: 12px; /* Increased space */
 }
 
 .event-choice-card p {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 15px;
-    line-height: 1.5;
+    font-size: 18px; /* Significantly larger font size */
+    color: rgba(255, 255, 255, 0.85); /* Slightly lighter text color */
+    margin-bottom: 25px; /* Increased space */
+    line-height: 1.6;
 }
 
 .event-choice-card img {
     width: 100%;
     border-radius: 16px;
-    margin-top: 10px;
+    margin-top: 20px; /* Increased space */
     object-fit: cover;
-    max-height: 180px; /* Puoi aggiustare se necessario */
+    max-height: 250px; /* Increased max height */
 }
 
-/* Rimosse le classi .time-off-card e .lessons-card per il background e border-left specifici.
-   Se si vogliono mantenere, si possono aggiungere stili più specifici qui o usare classi uniche.
-   Per ora, si affideranno allo stile di .event-choice-card e al ::before gradient. */
-
-/* Esempio se volessimo differenziare il bordo shimmer */
-/* .time-off-card::before {
-    background: linear-gradient(90deg, #8B5CF6, #c084fc, #3b82f6); 
-}
-.lessons-card::before {
-    background: linear-gradient(90deg, #EC4899, #f9a8d4, #ef4444);
-} */
+/* Removed old styles and classes that are now handled by .event-choice-card */
 
 </style> 

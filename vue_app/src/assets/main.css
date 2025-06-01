@@ -165,7 +165,6 @@ body {
     height: 10px;
     border-radius: 6px;
     overflow: hidden;
-    margin: 12px 0;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -545,8 +544,7 @@ body {
   border-radius: 30px 30px 0 0; /* Angoli arrotondati solo in alto */
   padding: 25px; /* Padding uniforme ora che la sovrapposizione è con margin */
   position: relative; 
-  z-index: 10; /* Sopra l'header per la sovrapposizione */
-  margin-top: -30px; /* VALORE CHIAVE: per la sovrapposizione. Da aggiustare! */
+  z-index: 10; /* Sopra l'header per la sovrapposizione */ /* VALORE CHIAVE: per la sovrapposizione. Da aggiustare! */
   flex-grow: 1;
   box-shadow: 0 -10px 30px rgba(0,0,0,0.3);
   overflow: hidden; /* Aggiunto per forzare il clipping degli angoli arrotondati */

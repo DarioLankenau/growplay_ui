@@ -65,10 +65,11 @@ export default {
     box-shadow: 0 -4px 20px rgba(0,0,0,0.25);
     display: flex;
     justify-content: space-around;
-    align-items: stretch; /* Per far sì che gli item occupino tutta l'altezza */
-    padding: 8px 0 4px 0; 
+    align-items: center; /* Center items vertically */
+    padding: 12px 0 8px 0; /* Increased vertical padding */
     z-index: 1002;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    height: 65px; /* Explicitly set height for a larger bar */
 }
 
 .footer-item {
@@ -78,18 +79,18 @@ export default {
     justify-content: center;
     text-decoration: none;
     color: #8e8e93; /* Grigio più tenue per non attivi */
-    font-size: 10px; 
+    font-size: 11px; /* Slightly larger font size */
     font-weight: 500;
     flex-grow: 1;
-    padding: 4px 8px; /* Aggiunto padding orizzontale */
+    padding: 8px 8px; /* Increased padding */
     transition: color 0.2s ease, transform 0.2s ease;
     text-align: center;
-    line-height: 1.2;
+    line-height: 1.3; /* Adjusted line height */
 }
 
 .footer-icon {
-    font-size: 20px; /* Leggermente ridotto */
-    margin-bottom: 3px; 
+    font-size: 24px; /* Larger icon size */
+    margin-bottom: 4px; /* Adjusted margin */
 }
 
 /* Stato attivo gestito da router-link active-class */

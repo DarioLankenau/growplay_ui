@@ -2,21 +2,21 @@
   <div class="new-chat-view">
     <div class="page-header-area" style="padding-bottom: 10px;">
       <div style="display: flex; align-items: center; justify-content: space-between;">
-        <h1 style="font-weight: 700; font-size: 28px; color: #fff;">Chat with me</h1>
-        <span style="font-size: 50px;">🤖</span>
+        <h1 style="font-weight: 700; font-size: 32px; color: #fff;">Chat with me</h1>
+        <span style="font-size: 60px;">🤖</span>
       </div>
     </div>
 
-    <div class="page-content-wrapper" style="background-color: #f0f4f8; padding: 20px; min-height: calc(100vh - 150px); display: flex; flex-direction: column;">
+    <div class="page-content-wrapper" style="background-color: #1E1E1E; padding: 30px; min-height: calc(100vh - 160px); display: flex; flex-direction: column;">
       <div class="faq-section">
-        <p style="font-weight: 500; font-size: 14px; color: #555; margin-bottom: 12px;">Frequently asked by your colleagues</p>
+        <p style="font-weight: 500; font-size: 16px; color: #a0a0a0; margin-bottom: 20px;">Frequently asked by your colleagues</p>
         <div class="faq-item" v-for="(item, index) in faqItems" :key="index">
           <div class="faq-question" @click="toggleFaq(index)">
-            <span>{{ item.question }}</span>
-            <span class="faq-arrow" :class="{ 'open': item.open }">&#9660;</span>
+            <span style="font-size: 16px;">{{ item.question }}</span>
+            <span class="faq-arrow" :class="{ 'open': item.open }" style="font-size: 16px;">&#9660;</span>
           </div>
           <div class="faq-answer" v-show="item.open">
-            <p>{{ item.answer }}</p>
+            <p style="font-size: 15px;">{{ item.answer }}</p>
           </div>
         </div>
       </div>
@@ -30,7 +30,9 @@
       <div class="chat-input-area">
         <input type="text" class="message-input" placeholder="Message..." v-model="newMessage" @keyup.enter="sendMessage">
         <button class="send-button" @click="sendMessage" v-if="newMessage.trim() !== ''">
-          <span style="font-size: 20px;">✈️</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="send-icon">
+            <path d="M12 4L3 15h6v6h6v-6h6z"/>
+          </svg>
         </button>
       </div>
     </div>
@@ -71,45 +73,54 @@ export default {
 
 <style scoped>
 .new-chat-view {
-  background-color: #4a42e3; /* Main background color */
+  background: linear-gradient(to bottom, #ff8a00, #e52e71, #4a42e3);
   min-height: 100vh;
-  padding-bottom: 0; /* No footer here, or handled by global layout if present */
+  padding-bottom: 0;
 }
 
 .page-header-area {
   padding: 20px;
-  /* background: #4a42e3; Already set on parent */
 }
 
 .page-content-wrapper {
   border-radius: 30px 30px 0 0;
-  /* background-color and padding are set inline */
+  background-color: #1E1E1E;
+  padding: 30px;
+  min-height: calc(100vh - 160px);
+  display: flex;
+  flex-direction: column;
 }
 
 .faq-section {
-  margin-bottom: 25px;
+  margin-bottom: 35px;
+}
+
+.faq-section p {
+  color: #a0a0a0;
+  font-size: 16px;
+  margin-bottom: 20px;
 }
 
 .faq-item {
-  background-color: #fff;
-  border-radius: 8px;
-  margin-bottom: 8px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  background-color: #2a2a2a;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35);
 }
 
 .faq-question {
-  padding: 12px 15px;
+  padding: 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
   font-weight: 500;
-  color: #333;
-  font-size: 14px;
+  color: #ffffff;
+  font-size: 16px;
 }
 
 .faq-arrow {
-  font-size: 12px;
+  font-size: 16px;
   transition: transform 0.3s ease;
 }
 
@@ -118,84 +129,96 @@ export default {
 }
 
 .faq-answer {
-  padding: 0 15px 12px 15px;
-  font-size: 13px;
-  color: #555;
-  border-top: 1px solid #eee;
-  margin-top: 8px;
-}
-.faq-answer p {
-  margin-top: 8px;
+  padding: 0 18px 18px 18px;
+  font-size: 15px;
+  color: #a0a0a0;
+  border-top: 1px solid #444;
+  margin-top: 12px;
 }
 
 .chat-area {
-  /* Styles for the chat conversation area */
-  /* flex-grow and display:flex are now inline */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .chat-messages {
   display: flex;
-  flex-direction: column-reverse; /* To keep input at bottom and messages flowing upwards */
-  gap: 12px;
-  padding: 10px 0;
-  overflow-y: auto; /* Allow scrolling of messages */
+  flex-direction: column-reverse;
+  gap: 15px;
+  padding: 15px 0;
+  overflow-y: auto;
   flex-grow: 1;
 }
 
 .message-bubble {
-  padding: 10px 15px;
+  padding: 15px 20px;
   border-radius: 20px;
-  max-width: 75%;
-  font-size: 14px;
-  line-height: 1.4;
+  max-width: 85%;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 .bot-message {
-  background-color: #e5e5ea; /* Light grey for bot messages */
-  color: #000;
-  align-self: flex-start; /* Bot messages on the left */
+  background-color: #2a2a2a;
+  color: #ffffff;
+  align-self: flex-start;
   border-radius: 20px 20px 20px 5px;
 }
 
 .user-message {
-  background-color: #007aff; /* Blue for user messages */
+  background-color: #4a42e3;
   color: #fff;
-  align-self: flex-end; /* User messages on the right */
+  align-self: flex-end;
   border-radius: 20px 20px 5px 20px;
 }
 
 .chat-input-area {
   display: flex;
   align-items: center;
-  padding: 8px 12px; /* Adjusted padding */
-  background-color: #fff;
-  border-radius: 25px;
-  box-shadow: 0 -1px 5px rgba(0,0,0,0.08); /* Shadow slightly adjusted for top edge */
-  /* Position fixed is removed, will stick to bottom due to flex layout of parent */
-  /* bottom, left, right, z-index removed */
-  margin: 15px; /* Margin around the input bar */
+  padding: 12px 20px;
+  background-color: #2a2a3a;
+  border-radius: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  margin: 25px 0 0 0;
 }
 
 .message-input {
   flex-grow: 1;
   border: none;
   outline: none;
-  padding: 10px 12px; /* Adjusted padding */
-  font-size: 15px;
+  padding: 12px 0;
+  font-size: 17px;
   background-color: transparent;
+  color: #ffffff;
+}
+
+.message-input::placeholder {
+  color: #888;
 }
 
 .send-button {
-  background: none;
+  background-color: #ffffff;
   border: none;
-  padding: 8px;
-  cursor: pointer;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 8px; /* Space between input and send button */
+  cursor: pointer;
+  margin-left: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s ease;
 }
 
-/* Removed .icon-button and .icon-button img styles as they are no longer used */
+.send-button:hover {
+  background-color: #eeeeee;
+}
 
+.send-icon {
+  width: 20px;
+  height: 20px;
+  color: #1E1E1E;
+}
 </style> 
