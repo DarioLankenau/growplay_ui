@@ -1,0 +1,568 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    box-sizing: border-box; /* Applicato a html per ereditarietà */
+}
+
+*, *::before, *::after { /* Eredita box-sizing */
+    box-sizing: inherit;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #0a0a0f;
+    min-height: 100vh;
+    /* padding: 0; rimosso perché il padding-bottom è per il footer */
+    padding-bottom: 70px; /* Spazio per il footer fisso */
+    color: #fff;
+    width: 100%;
+    overflow-x: hidden;
+    position: relative; /* Necessario per alcuni posizionamenti assoluti figli */
+}
+
+/* New styles for consistent page layout */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 70px); /* Full height minus footer height */
+  width: 100%;
+}
+
+.view-header {
+  padding: 25px;
+  background-color: #1E293B; /* A slightly lighter dark blue, adjust as needed */
+  color: #FFFFFF;
+  width: 100%;
+  /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); */ /* Optional shadow */
+  text-align: center; /* Center align header text by default */
+}
+
+.view-header h1, .view-header h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  margin: 0 0 10px 0;
+}
+
+.view-content {
+  flex-grow: 1;
+  padding: 20px;
+  width: 100%;
+  max-width: 900px; /* Max width for content, can be adjusted */
+  margin: 0 auto; /* Center content area */
+  overflow-y: auto; /* Allow content to scroll if needed */
+}
+
+/* Responsive adjustments for page layout */
+@media (max-width: 768px) {
+  .view-header {
+    padding: 20px 15px;
+  }
+  .view-header h1, .view-header h2 {
+    font-size: 1.5rem; /* Adjust font size for smaller screens */
+  }
+  .view-content {
+    padding: 15px;
+  }
+}
+
+/* Stili per il layout di pagina standard */
+.page-content-wrapper {
+    width: 100%;
+    max-width: 700px; /* Max-width standard per il contenuto */
+    margin: 0 auto; /* Centra il container */
+    padding: 25px;  /* Padding di default */
+}
+
+.page-header-area {
+    padding: 20px;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    margin-bottom: 20px; /* Spazio sotto l'header prima del content wrapper */
+}
+.page-header-area h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+.page-header-area p {
+    font-size: 16px;
+    opacity: 0.8;
+    margin-top: 0;
+}
+
+/* Stili delle Card Generali (da .card in growplay-home-ui.html) */
+.card {
+    background: rgba(25, 25, 40, 0.8);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+        0 16px 32px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 16px; /* Spazio tra le card se multiple in colonna */
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow:
+        0 24px 48px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Effetto shimmer per il bordo superiore delle card */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Varianti di colore per l'effetto shimmer (da classi come .challenge-card::before) */
+.challenge-card.card::before { /* Specificità aumentata */
+    background: linear-gradient(90deg, #9333ea, #ec4899, #3b82f6);
+}
+
+.discover-card.card::before {
+    background: linear-gradient(90deg, #f59e0b, #ef4444, #8b5cf6);
+}
+
+.events-card.card::before { /* Per la card riassuntiva eventi, se la riporteremo */
+    background: linear-gradient(90deg, #06b6d4, #10b981, #3b82f6);
+}
+
+.sam-card.card::before {
+    background: linear-gradient(90deg, #00f5ff, #0066ff, #00f5ff);
+}
+
+.card h3 { /* Titolo H3 dentro una card */
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 16px;
+    color: #fff;
+}
+
+/* Stili per Elementi Comuni (progress bar, bottoni, etc. da growplay-home-ui.html) */
+.progress-bar {
+    background: rgba(255, 255, 255, 0.1);
+    height: 10px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 12px 0;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #9333ea, #ec4899);
+    width: 43%; /* Esempio, dovrebbe essere dinamico */
+    border-radius: 6px;
+    animation: progressGrow 2s ease-out; /* Animazione da definire */
+    box-shadow: 0 0 12px rgba(236, 72, 153, 0.4);
+}
+
+.micro-action {
+    background: rgba(147, 51, 234, 0.1);
+    border: 2px solid rgba(147, 51, 234, 0.3);
+    border-radius: 18px;
+    padding: 18px;
+    margin: 16px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(10px);
+}
+
+.micro-action:hover {
+    background: rgba(147, 51, 234, 0.2);
+    border-color: rgba(147, 51, 234, 0.5);
+    transform: scale(1.02);
+}
+
+.complete-btn {
+    background: linear-gradient(135deg, #9333ea, #ec4899);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(147, 51, 234, 0.3);
+}
+
+.complete-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(147, 51, 234, 0.4);
+}
+.complete-btn:disabled {
+    background: linear-gradient(135deg, #10b981, #06b6d4);
+    box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
+}
+
+
+.stats {
+    display: flex;
+    gap: 12px;
+    margin: 16px 0;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px 14px;
+    border-radius: 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+}
+
+.course-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.course-item:last-child {
+    border-bottom: none;
+}
+
+.course-info h4 {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #fff;
+    font-size: 15px;
+}
+
+.course-meta {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.alignment-score {
+    background: linear-gradient(135deg, #00f5ff, #0066ff);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    box-shadow: 0 4px 8px rgba(0, 245, 255, 0.2);
+}
+
+/* Per event-item, chat-preview, prompt-pill etc. che erano in growplay-home-ui.html */
+.event-item {
+    padding: 16px;
+    background: rgba(6, 182, 212, 0.08);
+    border-radius: 16px;
+    margin-bottom: 12px;
+    border-left: 3px solid #06b6d4;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(6, 182, 212, 0.2);
+}
+
+.event-title { /* Usato anche in SAM card se ricordo bene */
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #fff;
+    font-size: 15px;
+}
+
+.event-meta {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.rsvp-btn {
+    background: linear-gradient(135deg, #06b6d4, #10b981);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+}
+
+.rsvp-btn:hover {
+    transform: scale(1.05);
+}
+
+.chat-preview { /* Per SAM card */
+    background: rgba(0, 245, 255, 0.05);
+    border: 1px solid rgba(0, 245, 255, 0.2);
+    border-radius: 18px;
+    padding: 18px;
+    margin-bottom: 16px;
+    backdrop-filter: blur(10px);
+}
+
+.chat-bubble { /* Per SAM card */
+    background: linear-gradient(135deg, #00f5ff, #0066ff);
+    color: white;
+    padding: 14px 18px;
+    border-radius: 20px; /* Da sam.html era 16px 16px 16px 4px; */
+    display: inline-block;
+    margin-bottom: 12px;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 245, 255, 0.2);
+    animation: chatBounce 3s ease-in-out infinite; /* Animazione da definire */
+}
+
+.quick-prompts { /* Per SAM card */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.prompt-pill { /* Per SAM card */
+    background: rgba(0, 245, 255, 0.08);
+    border: 1px solid rgba(0, 245, 255, 0.2);
+    padding: 10px 16px;
+    border-radius: 16px; /* Da sam.html era 20px */
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    font-weight: 500;
+}
+
+.prompt-pill:hover {
+    background: rgba(0, 245, 255, 0.15);
+    border-color: rgba(0, 245, 255, 0.4);
+    transform: scale(1.02);
+}
+
+/* Bottoni di Azione Generali (.action-btn e varianti) */
+.action-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 12px 24px;
+    border-radius: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    font-size: 14px;
+    border: none;
+    color: white;
+}
+
+.action-btn:hover {
+    transform: scale(1.02);
+    opacity: 0.9;
+}
+
+.linkedin-btn.action-btn {
+    background: linear-gradient(135deg, #0e76a8, #2b3338);
+    border: 2px solid rgba(14, 118, 168, 0.5);
+    box-shadow: 0 4px 12px rgba(14, 118, 168, 0.3);
+}
+
+.career-gps-btn.action-btn {
+    background: linear-gradient(135deg, #f59e0b, #ef4444);
+    border: 2px solid rgba(245, 158, 11, 0.5);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.view-all-btn.action-btn { /* .view-all-btn era separato, ora lo tratto come un .action-btn */
+    background: rgba(147, 51, 234, 0.1);
+    border: 2px solid rgba(147, 51, 234, 0.3);
+    color: #9333ea; /* Testo specifico per questo bottone */
+}
+.view-all-btn.action-btn:hover {
+    background: rgba(147, 51, 234, 0.2);
+    border-color: rgba(147, 51, 234, 0.5);
+}
+
+
+/* Animazioni */
+@keyframes headerFloat {
+    0%, 100% { transform: rotate(0deg) translateY(0px); }
+    50% { transform: rotate(2deg) translateY(-5px); }
+}
+
+@keyframes profilePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes borderGlow {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+}
+
+@keyframes iconFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(5deg); }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes progressGrow {
+    from { width: 0%; }
+    /* to: { width: 43%; }  Rimosso, la larghezza sarà impostata da JS */
+}
+
+@keyframes chatBounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-4px); }
+    60% { transform: translateY(-2px); }
+}
+
+@keyframes samFloat { /* Per il bottone SAM flottante */
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    25% { transform: translateY(-8px) rotate(2deg); }
+    75% { transform: translateY(-4px) rotate(-1deg); }
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(400%); } /* Aumentato per un effetto più lungo sulla card */
+}
+
+.confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: confetti-fall 3s ease-out infinite; /* Rinominata per chiarezza */
+    z-index: 10000; /* Alto z-index per essere sopra tutto */
+}
+
+@keyframes confetti-fall { /* Rinominata */
+    0% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(120px) rotate(720deg); /* Cade verso il basso */
+    }
+}
+
+/* Stili per il Floating SAM button che erano in growplay-home-ui.html */
+/* Questi potrebbero andare in un componente SAMButton.vue o App.vue se globale */
+.floating-sam-btn { /* Rinominato per chiarezza */
+    position: fixed;
+    bottom: 85px; /* Alzato per non sovrapporsi al footer Vue */
+    right: 20px;
+    width: 60px; /* Leggermente più piccolo */
+    height: 60px;
+    background: linear-gradient(135deg, #00f5ff, #0066ff);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px; /* Emoji */
+    box-shadow:
+        0 12px 24px rgba(0, 245, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    animation: samFloat 4s ease-in-out infinite;
+    z-index: 1001; /* Sopra il contenuto ma sotto il footer se il footer è 1002 */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.floating-sam-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Nota: le media query per .container, .header, .content da growplay-home-ui.html
+   non sono state incluse qui perché gestiranno il layout generale dell'app Vue
+   in modo diverso, probabilmente tramite App.vue e i singoli view components.
+   Il layout a griglia per desktop verrà reimplementato a livello di App.vue o Home.vue se necessario.
+*/
+
+/* New styles for Overlapping Two-Container Page Layout */
+.page-layout-stacked {
+  position: relative; 
+  min-height: calc(100vh - 70px); /* Altezza viewport meno footer */
+  background-color: #0a0a0f; /* Stesso colore del body, per evitare flash di colori diversi */
+  display: flex;
+  flex-direction: column;
+}
+
+.page-layout-stacked-header {
+  background: linear-gradient(135deg, #1a2a6c 0%, #b21f1f 50%, #fdbb2d 100%); /* Gradiente più ricco e scuro */
+  color: white;
+  padding: 40px 30px 60px 30px; /* Aumentato padding per più altezza e spazio per sovrapposizione */
+  text-align: center;
+  z-index: 5;
+  height: auto; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Mantenuto per il posizionamento di elementi figli come il back-button */
+  background-size: cover; /* Per eventuali immagini di sfondo applicate da classi specifiche */
+  background-position: center; /* Per eventuali immagini di sfondo applicate da classi specifiche */
+}
+
+.page-layout-stacked-header h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2.4rem; /* Leggermente più grande */
+  margin: 0;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.page-layout-stacked-content {
+  background-color: #1A1A2E; /* Colore scuro per il contenuto, simile al viola/blu notte */
+  color: #E0E0E0; /* Testo chiaro per contrasto */
+  border-radius: 30px 30px 0 0; /* Angoli arrotondati solo in alto */
+  padding: 25px; /* Padding uniforme ora che la sovrapposizione è con margin */
+  position: relative; 
+  z-index: 10; /* Sopra l'header per la sovrapposizione */
+  margin-top: -30px; /* VALORE CHIAVE: per la sovrapposizione. Da aggiustare! */
+  flex-grow: 1;
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.3);
+  overflow: hidden; /* Aggiunto per forzare il clipping degli angoli arrotondati */
+}
+
+/* Responsive adjustments for stacked layout */
+@media (max-width: 768px) {
+  .page-layout-stacked-header {
+    padding: 30px 20px 50px 20px; /* Adattato padding mobile */
+  }
+  .page-layout-stacked-header h1 {
+    font-size: 2rem;
+  }
+  .page-layout-stacked-content {
+    border-radius: 20px 20px 0 0;
+    padding: 20px;
+    margin-top: -20px; /* Sovrapposizione mobile */
+  }
+}
